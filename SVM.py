@@ -14,9 +14,11 @@ X4=pd.read_csv('processed_data\\gamma.csv')
 X5=pd.read_csv('processed_data\\theta.csv')
 
 X=X3
+
 # X=X.merge(X2,how="right",left_index=True,right_index=True)
 # X=X.merge(X3,how="right",left_index=True,right_index=True)
 # X=X.merge(X4,how="right",left_index=True,right_index=True)
+
 X=X.merge(X5,how="right",left_index=True,right_index=True)
 
 
@@ -39,7 +41,7 @@ print(f"{X.shape}-----{y.shape}")
 
 svm_clf=Pipeline([
     ("scaler",StandardScaler()),
-    ("linear_svc",LinearSVC(C=1,loss="hinge")),
+    ("linear_svc",LinearSVC(loss="hinge")),
 ])
 
 svm_clf.fit(X,y)
@@ -50,8 +52,9 @@ conf_matrix=confusion_matrix(y_train_pred,y)
 accuracy=accuracy_score(y_true=y,y_pred=y_train_pred)
 recall=recall_score(y_true=y,y_pred=y_train_pred)
 f1_s=f1_score(y_true=y,y_pred=y_train_pred)
-print(conf_matrix)
+# print(conf_matrix)
 
+print()
 print(f"accuracy = {accuracy}")
 print(f"recall = {recall}")
 print(f"f1_score = {f1_s}")
